@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b0a">
+<title>NEXA | پیام‌رسان</title>
+<style>
+:root{--bg:#080b0a;--panel:#111813;--green:#b9f27c;--muted:#9ba99f;--line:#29352d}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top,#1b2a1e,#080b0a 65%);color:#f2f7f3;font-family:system-ui,sans-serif;min-height:100vh}
+main{max-width:850px;margin:auto;padding:24px 15px}
+header{display:flex;align-items:center;gap:12px;margin-bottom:25px}
+.logo{background:var(--green);color:#101710;border-radius:15px;width:48px;height:48px;display:grid;place-items:center;font-size:25px;font-weight:900}
+h1{margin:0;letter-spacing:3px}header p{color:var(--muted);margin:4px 0;font-size:13px}
+.panel{background:#111813eF;border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-bottom:16px}
+.heading{padding:19px;border-bottom:1px solid var(--line)}
+h2{font-size:19px;margin:0 0 6px}
+.muted{color:var(--muted);font-size:13px}
+input{width:100%;padding:13px;margin-top:15px;background:#080b0a;color:white;border:1px solid var(--line);border-radius:12px;font-size:15px}
+.chat{display:flex;gap:13px;align-items:center;padding:16px;border-bottom:1px solid #222d25;cursor:pointer}
+.chat:hover,.chat.active{background:#b9f27c0e}
+.avatar{width:45px;height:45px;flex-shrink:0;border-radius:15px;background:#263b2a;color:var(--green);display:grid;place-items:center;font-weight:bold}
+.details{flex:1}.name{font-weight:700;margin-bottom:5px}.preview{font-size:12px;color:var(--muted)}
+.status{color:var(--green);font-size:11px}
+.welcome{text-align:center;padding:34px 20px}
+.symbol{font-size:36px;color:var(--green);margin-bottom:10px}
+.welcome p{color:var(--muted);line-height:2;font-size:14px}
+.notice{margin:0 16px 17px;border:1px solid var(--line);padding:12px;border-radius:12px;color:var(--muted);font-size:12px;line-height:1.9}
+footer{text-align:center;color:#77847a;font-size:11px;padding:12px}
+</style>
+</head>
+<body>
+<main>
+<header>
+<div class="logo">N</div>
+<div><h1>NEXA</h1><p>ارتباطی ساده، مدرن و هوشمند</p></div>
+</header>
+<section class="panel">
+<div class="heading">
+<h2>گفتگوها</h2>
+<div class="muted">دنیای ارتباطات تو</div>
+<input id="search" placeholder="جست‌وجوی گفتگو..." aria-label="جست‌وجو">
+</div>
+<div id="chats">
+<div class="chat active" data-name="تیم NEXA" data-preview="به دنیای NEXA خوش آمدی">
+<div class="avatar">N</div><div class="details"><div class="name">تیم NEXA</div><div class="preview">به دنیای NEXA خوش آمدی</div></div><span class="status">جدید</span>
+</div>
+<div class="chat" data-name="دوستان" data-preview="گفتگوهای دوستانت اینجا">
+<div class="avatar">دو</div><div class="details"><div class="name">دوستان</div><div class="preview">گفتگوهای دوستانت اینجا</div></div>
+</div>
+<div class="chat" data-name="یادداشت‌های من" data-preview="فضای شخصی تو">
+<div class="avatar">✦</div><div class="details"><div class="name">یادداشت‌های من</div><div class="preview">فضای شخصی تو</div></div>
+</div>
+</div>
+</section>
+<section class="panel">
+<div class="welcome">
+<div class="symbol">✉</div>
+<h2 id="title">به NEXA خوش آمدی</h2>
+<p id="message">طراحی تیره، سبز نئونی و تجربه‌ای تازه برای گفتگو. این اولین قدم در ساخت پیام‌رسان NEXA است.</p>
+</div>
+<div class="notice">این نسخه فعلاً پیش‌نمایش رابط کاربری است. برای ارسال واقعی پیام، ثبت‌نام کاربران و همگام‌سازی گفتگوها باید سرور و پایگاه داده را متصل کنیم.</div>
+</section>
+<footer>NEXA • ارتباطات نسل بعد</footer>
+</main>
+<script>
+const chats=[...document.querySelectorAll('.chat')];
+chats.forEach(chat=>chat.addEventListener('click',()=>{
+chats.forEach(c=>c.classList.remove('active'));
+chat.classList.add('active');
+document.getElementById('title').textContent=chat.dataset.name;
+document.getElementById('message').textContent=chat.dataset.preview;
+}));
+document.getElementById('search').addEventListener('input',e=>{
+const q=e.target.value.toLowerCase();
+chats.forEach(c=>c.style.display=c.dataset.name.toLowerCase().includes(q)||c.dataset.preview.toLowerCase().includes(q)?'flex':'none');
+});
+</script>
+</body>
+</html>
